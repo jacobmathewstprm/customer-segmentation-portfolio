@@ -12,7 +12,30 @@ This analysis seeks to answer the strategic question: **"What data-driven recomm
 
 * **Languages:** Python, SQL
 * **Libraries & Platforms:** Pandas, Google BigQuery, Tableau
+---
+## Methodology Deep Dive: Customer Segments Explained
+The analysis produced five distinct customer segments based on their RFM (Recency, Frequency, Monetary) scores. These scores were calculated by ranking each customer from 1 to 4 in each category using the NTILE(4) window function in SQL. A higher score is always better.
 
+The meaning of each score is as follows:
+
+| Score | Recency (R) | Frequency (F) | Monetary (M) |
+| :--- | :--- | :--- | :--- |
+| **4** | Most Recent (Top 25%) | Most Frequent (Top 25%) | Highest Spending (Top 25%) |
+| **3** | Fairly Recent (25-50%) | Fairly Frequent (25-50%) | High Spending (25-50%) |
+| **2** | Not very Recent (50-75%) | Infrequent (50-75%) | Low Spending (50-75%) |
+| **1** | Least Recent (Bottom 25%)| Least Frequent (Bottom 25%) | Lowest Spending (Bottom 25%)|
+
+Based on combinations of these scores, customers were classified into the following segments:
+
+Loyal Customers: Your best customers. They consistently score high across all three categories (e.g., scores like 444, 434, 344). They are the stable core of the business, and the priority is to retain and reward them.
+
+Promising: Recent customers (Recency of 3 or 4) who show potential but do not yet buy frequently or spend a lot. This is the largest group by customer count and represents the biggest pool for growth. The priority is to nurture them.
+
+At-Risk: Customers who used to be valuable (high Frequency and/or Monetary scores) but have not purchased in a while (Recency of 1 or 2). They are the most critical segment for immediate action. The priority is intervention and re-engagement.
+
+Lapsed VIPs: A small but historically valuable group. They have a history of spending a lot (Monetary score of 4) but have become inactive (Recency of 1 or 2). They are ideal candidates for high-effort win-back campaigns.
+
+Lost: Customers with low scores across the board (e.g., scores like 111, 121, 211). They are the lowest priority for marketing spend.
 ---
 ## Interactive Dashboard
 
@@ -29,16 +52,7 @@ The most critical finding is that the 'At-Risk' segment is the single largest so
 
 ![Total Revenue Chart](images/total_revenue_screenshot.png)
 
-### Finding 2: The Customer Segments
-Our RFM analysis produced five distinct customer segments, each with its own strategic importance:
-
-* **At-Risk:** The highest priority for immediate action. These customers used to be valuable but haven't purchased in a while, and they represent the largest portion of total revenue.
-* **Promising:** The largest group by customer count. These are recent customers with high potential who need to be nurtured to increase their loyalty and spending.
-* **Loyal Customers:** The stable core of the business. These customers buy recently and frequently and should be retained and rewarded.
-* **Lapsed VIPs:** A small but historically high-spending group of inactive customers. They are prime candidates for high-effort "win-back" campaigns.
-* **Lost:** Inactive, low-value customers who are the lowest priority for marketing efforts.
-
-### Finding 3: The Customer Retention Story
+### Finding 2: The Customer Retention Story
 ![Cohort Analysis Chart](images/cohort_heatmap_screenshot.png)
 The cohort analysis shows that the biggest drop-off in customer activity occurs immediately after the first month. It also reveals that the earliest customer cohort (December 2010) had significantly better long-term retention, providing an opportunity to analyze past business practices for clues to improving loyalty today.
 
@@ -60,3 +74,7 @@ Based on the analysis, the following data-driven solutions can be implemented:
 2.  **Nurture the 'Promising' Segment:** Implement marketing automation to guide this large group toward their next purchase and convert them into Loyal Customers.
 3.  **Reward 'Loyal Customers':** Protect this reliable segment by implementing a VIP or loyalty program to reward their high frequency.
 4.  **Win Back 'Lapsed VIPs':** Create a special, high-value offer for this small but historically valuable group.
+
+---
+## Code
+All SQL scripts used for data modeling and analysis in Google BigQuery can be found in the [sql_scripts folder](sql_scripts/).
