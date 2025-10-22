@@ -27,7 +27,7 @@ The meaning of each score is as follows:
 
 Based on combinations of these scores, customers were classified into the following segments:
 
-Loyal Customers: Your best customers. They consistently score high across all three categories (e.g., scores like 444, 434, 344). They are the stable core of the business, and the priority is to retain and reward them.
+Loyal Customers: Best customers. They consistently score high across all three categories (e.g., scores like 444, 434, 344). They are the stable core of the business, and the priority is to retain and reward them.
 
 Promising: Recent customers (Recency of 3 or 4) who show potential but do not yet buy frequently or spend a lot. This is the largest group by customer count and represents the biggest pool for growth. The priority is to nurture them.
 
@@ -36,6 +36,7 @@ At-Risk: Customers who used to be valuable (high Frequency and/or Monetary score
 Lapsed VIPs: A small but historically valuable group. They have a history of spending a lot (Monetary score of 4) but have become inactive (Recency of 1 or 2). They are ideal candidates for high-effort win-back campaigns.
 
 Lost: Customers with low scores across the board (e.g., scores like 111, 121, 211). They are the lowest priority for marketing spend.
+
 ---
 ## Interactive Dashboard
 
